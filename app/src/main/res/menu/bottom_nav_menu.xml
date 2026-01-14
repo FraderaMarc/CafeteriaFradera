@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/begudesFragment"
+        android:icon="@drawable/baseline_local_drink_24"
+        android:title="Begudes" />
+    <item
+        android:id="@+id/menjarsFragment"
+        android:icon="@drawable/outline_breakfast_dining_24"
+        android:title="Menjars" />
+    <item
+        android:id="@+id/postresFragment"
+        android:icon="@drawable/outline_cake_24"
+        android:title="Postres" />
+    <item
+        android:id="@+id/historialFragment"
+        android:icon="@drawable/outline_book_2_24"
+        android:title="Historial" />
+    <item
+        android:id="@+id/pagamentFragment"
+        android:icon="@drawable/outline_add_shopping_cart_24"
+        android:title="Pagament" />
+</menu>

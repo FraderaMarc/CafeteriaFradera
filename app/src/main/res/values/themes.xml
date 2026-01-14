@@ -1,0 +1,26 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Tema principal basado en MaterialComponents -->
+    <style name="Theme.CafeteriaFradera"
+        parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- personaliza tus colores -->
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimaryVariant">@color/white</item>
+        <item name="colorSecondary">@color/cian</item>
+        <item name="android:statusBarColor">@color/black</item>
+    </style>
+
+    <!-- Splash compatible -->
+    <style name="Theme.CafeteriaFradera.Splash"
+        parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowBackground">@color/cian</item>
+        <item name="windowSplashScreenBackground">@color/cian</item>
+        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher</item>
+        <item name="postSplashScreenTheme">@style/Theme.CafeteriaFradera</item>
+    </style>
+
+    <!-- Otro tema opcional -->
+    <style name="Base.Theme.BottomMenu" parent="Theme.Material3.DayNight.NoActionBar">
+    </style>
+
+</resources>

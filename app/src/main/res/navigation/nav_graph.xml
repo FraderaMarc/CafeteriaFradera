@@ -1,0 +1,46 @@
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.fradera.cafeteriafradera.LoginFragment">
+
+        <action
+            android:id="@+id/action_loginFragment_to_begudesFragment"
+            app:destination="@id/begudesFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
+
+        <action
+            android:id="@+id/action_loginFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.fradera.cafeteriafradera.RegisterFragment" />
+
+    <fragment
+        android:id="@+id/begudesFragment"
+        android:name="com.fradera.cafeteriafradera.BegudesFragment" />
+
+    <fragment
+        android:id="@+id/historialFragment"
+        android:name="com.fradera.cafeteriafradera.HistorialFragment" />
+
+    <fragment
+        android:id="@+id/menjarsFragment"
+        android:name="com.fradera.cafeteriafradera.MenjarsFragment" />
+
+    <fragment
+        android:id="@+id/pagamentFragment"
+        android:name="com.fradera.cafeteriafradera.PagamentFragment" />
+
+    <fragment
+        android:id="@+id/postresFragment"
+        android:name="com.fradera.cafeteriafradera.PostresFragment" />
+
+</navigation>
