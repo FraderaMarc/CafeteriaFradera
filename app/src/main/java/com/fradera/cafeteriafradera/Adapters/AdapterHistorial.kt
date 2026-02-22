@@ -11,9 +11,9 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-class HistorialAdapter(
+class AdapterHistorial(
     private val onClick: (OrderDto) -> Unit
-) : RecyclerView.Adapter<HistorialAdapter.VH>() {
+) : RecyclerView.Adapter<AdapterHistorial.VH>() {
 
     private val items = mutableListOf<OrderDto>()
     private val df = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
@@ -50,17 +50,18 @@ class HistorialAdapter(
         private var current: OrderDto? = null
 
         init {
-            itemView.setOnClickListener {
-                current?.let(onClick)
-            }
+            itemView.setOnClickListener { current?.let(onClick) }
         }
 
         fun bind(order: OrderDto) {
             current = order
+
             tvId.text = "Comanda: ${order.id.take(8)}"
-            val millis = order.createdAt?.toDate()?.time ?: 0L
+
+            val millis = order.createdAtMillis
             tvDate.text = if (millis == 0L) "Fecha: -"
             else "Fecha: ${df.format(Date(millis))}"
+
             tvTotal.text = "Total: %.2f €".format(order.total)
             tvStatus.text = "Estado: ${order.status}"
         }

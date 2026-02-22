@@ -9,7 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.fradera.cafeteriafradera.ui.historial.HistorialAdapter
+import com.fradera.cafeteriafradera.ui.historial.AdapterHistorial
 
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -23,7 +23,7 @@ class HistorialFragment : Fragment(R.layout.fragment_historial) {
     private lateinit var tvError: TextView
     private lateinit var pb: ProgressBar
 
-    private lateinit var adapter: HistorialAdapter
+    private lateinit var adapter: AdapterHistorial
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -33,7 +33,7 @@ class HistorialFragment : Fragment(R.layout.fragment_historial) {
         tvError = view.findViewById(R.id.tvError)
         pb = view.findViewById(R.id.pbLoading)
 
-        adapter = HistorialAdapter { /* click order si quieres */ }
+        adapter = AdapterHistorial { /* click order si quieres */ }
 
         rv.layoutManager = LinearLayoutManager(requireContext())
         rv.adapter = adapter

@@ -11,8 +11,9 @@ data class OrderItemDto(
 
 data class OrderDto(
     val id: String = "",
-    val createdAt: Timestamp? = null,
-    val status: String = "created",
+    val uid: String = "",
     val total: Double = 0.0,
-    val items: List<OrderItemDto> = emptyList()
+    val status: String = "Pagado",
+    val createdAtMillis: Long = 0L,
+    val items: List<Map<String, Any?>> = emptyList()
 )

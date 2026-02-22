@@ -22,7 +22,10 @@ class SharedViewModel : ViewModel() {
         _items.value = list
     }
 
-    fun getTotal(): Double =
-        _items.value?.sumOf { it.preu} ?: 0.0
-}
+    fun clearItems() {
+        _items.value = mutableListOf()
+    }
 
+    fun getTotal(): Double =
+        _items.value?.sumOf { it.preu } ?: 0.0
+}

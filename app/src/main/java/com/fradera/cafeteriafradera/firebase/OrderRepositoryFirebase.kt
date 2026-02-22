@@ -7,15 +7,30 @@ import kotlinx.coroutines.tasks.await
 class OrderRepositoryFirebase(
     private val db: FirebaseFirestore = FirebaseFirestore.getInstance()
 ) {
-    private fun ordersRef(uid: String) =
-        db.collection("users").document(uid).collection("orders")
 
     suspend fun getOrders(uid: String): List<OrderDto> {
-        val snap = ordersRef(uid)
-            .orderBy("createdAt", Query.Direction.DESCENDING)
+        val snap = db.collection("orders")
+            .whereEqualTo("uid", uid)
+            .orderBy("createdAtMillis", Query.Direction.DESCENDING)
             .get()
             .await()
 
-        return snap.documents.mapNotNull { it.toObject(OrderDto::class.java) }
+        return snap.documents.map { doc ->
+            val total = doc.getDouble("total") ?: 0.0
+            val status = doc.getString("status") ?: "Pagado"
+            val createdAtMillis = doc.getLong("createdAtMillis") ?: 0L
+
+            @Suppress("UNCHECKED_CAST")
+            val items = (doc.get("items") as? List<Map<String, Any?>>) ?: emptyList()
+
+            OrderDto(
+                id = doc.id,
+                uid = doc.getString("uid") ?: uid,
+                total = total,
+                status = status,
+                createdAtMillis = createdAtMillis,
+                items = items
+            )
+        }
     }
 }
