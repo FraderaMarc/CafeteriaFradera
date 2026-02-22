@@ -1,51 +1,49 @@
 package com.fradera.cafeteriafradera
 
+import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
+import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
 
-class LoginFragment : Fragment(R.layout.fragment_login) {
+class Login : AppCompatActivity() {
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    private lateinit var auth: FirebaseAuth
 
-        val etUser = view.findViewById<EditText>(R.id.etUser)
-        val etPass = view.findViewById<EditText>(R.id.etPass)
-        val btnLogin = view.findViewById<Button>(R.id.btnLogin)
-        val btnRegister = view.findViewById<Button>(R.id.btnRegister)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.fragment_login)
 
-        val prefs = requireActivity().getSharedPreferences("dades", 0)
+        auth = FirebaseAuth.getInstance()
+
+        val etUser = findViewById<EditText>(R.id.etUser)
+        val etPass = findViewById<EditText>(R.id.etPass)
+        val btnLogin = findViewById<Button>(R.id.btnLogin)
+        val btnRegister = findViewById<Button>(R.id.btnRegister)
 
         btnLogin.setOnClickListener {
+            val email = etUser.text.toString().trim()   // Firebase Email/Password => email
+            val pass = etPass.text.toString().trim()
 
-            val user = etUser.text.toString()
-            val pass = etPass.text.toString()
-
-            val userGuardat = prefs.getString("user", "")
-            val passGuardada = prefs.getString("pass", "")
-
-            if (user == userGuardat && pass == passGuardada) {
-
-                findNavController()
-                    .navigate(R.id.action_loginFragment_to_begudesFragment)
-
-            } else {
-                Toast.makeText(
-                    requireContext(),
-                    "Login incorrecte",
-                    Toast.LENGTH_SHORT
-                ).show()
+            if (email.isEmpty() || pass.isEmpty()) {
+                Toast.makeText(this, "Omple usuari i contrasenya", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
             }
+
+            auth.signInWithEmailAndPassword(email, pass)
+                .addOnSuccessListener {
+                    startActivity(Intent(this, MainActivity::class.java))
+                    finish()
+                }
+                .addOnFailureListener { e ->
+                    Toast.makeText(this, "Error login: ${e.message}", Toast.LENGTH_SHORT).show()
+                }
         }
 
         btnRegister.setOnClickListener {
-
-            findNavController()
-                .navigate(R.id.action_loginFragment_to_registerFragment)
+            startActivity(Intent(this, Register::class.java))
         }
     }
 }

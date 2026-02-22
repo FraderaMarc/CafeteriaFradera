@@ -1,40 +1,48 @@
 package com.fradera.cafeteriafradera
 
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
 
-class RegisterFragment : Fragment(R.layout.fragment_register) {
+class Register : AppCompatActivity() {
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    private lateinit var auth: FirebaseAuth
 
-        val etUser = view.findViewById<EditText>(R.id.etUser)
-        val etPass = view.findViewById<EditText>(R.id.etPass)
-        val btnGuardar = view.findViewById<Button>(R.id.btnGuardar)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.fragment_register)
 
-        val prefs = requireActivity().getSharedPreferences("dades", 0)
+        auth = FirebaseAuth.getInstance()
+
+        val etUser = findViewById<EditText>(R.id.etUser)
+        val etPass = findViewById<EditText>(R.id.etPass)
+        val btnGuardar = findViewById<Button>(R.id.btnGuardar)
 
         btnGuardar.setOnClickListener {
+            val email = etUser.text.toString().trim()
+            val pass = etPass.text.toString().trim()
 
-            val user = etUser.text.toString()
-            val pass = etPass.text.toString()
-
-            if (user != "" && pass != "") {
-
-                val editor = prefs.edit()
-                editor.putString("user", user)
-                editor.putString("pass", pass)
-                editor.commit()
-
-                Toast.makeText(activity, "Usuari guardat", Toast.LENGTH_SHORT).show()
-                parentFragmentManager.popBackStack()
-
-            } else {
-                Toast.makeText(activity, "Falten dades", Toast.LENGTH_SHORT).show()
+            if (email.isEmpty() || pass.isEmpty()) {
+                Toast.makeText(this, "Omple usuari i contrasenya", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
             }
+
+            if (pass.length < 6) {
+                Toast.makeText(this, "La contrasenya ha de tenir mínim 6 caràcters", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            auth.createUserWithEmailAndPassword(email, pass)
+                .addOnSuccessListener {
+                    Toast.makeText(this, "Compte creat correctament", Toast.LENGTH_SHORT).show()
+                    finish() // vuelve a Login
+                }
+                .addOnFailureListener { e ->
+                    Toast.makeText(this, "Error registre: ${e.message}", Toast.LENGTH_SHORT).show()
+                }
         }
     }
 }

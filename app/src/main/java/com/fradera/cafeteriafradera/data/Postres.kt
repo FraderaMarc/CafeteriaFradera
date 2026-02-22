@@ -6,16 +6,18 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "postres")
 data class Postres(
-
     @ColumnInfo(name = "nom")
     var nom: String,
+
     @ColumnInfo(name = "preu")
     var preu: Double,
+
     @ColumnInfo(name = "tipus")
     var tipus: String,
-    @ColumnInfo(name= "imatge")
-    val imageResId: Int)
-{
+
+    @ColumnInfo(name = "imatge")
+    val imageResId: Int
+) {
     @PrimaryKey(autoGenerate = true)
     var id: Int? = null
 }
