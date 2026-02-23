@@ -24,7 +24,7 @@ class Login : AppCompatActivity() {
         val btnRegister = findViewById<Button>(R.id.btnRegister)
 
         btnLogin.setOnClickListener {
-            val email = etUser.text.toString().trim()   // Firebase Email/Password => email
+            val email = etUser.text.toString().trim()
             val pass = etPass.text.toString().trim()
 
             if (email.isEmpty() || pass.isEmpty()) {

@@ -33,7 +33,7 @@ class PagamentFragment : Fragment() {
 
         val tvTotal = view.findViewById<TextView>(R.id.tvTotal)
         val recycler = view.findViewById<RecyclerView>(R.id.recyclerPagament)
-        val btnPagar = view.findViewById<Button>(R.id.btnPagar) // <-- si tu id es otro, cámbialo
+        val btnPagar = view.findViewById<Button>(R.id.btnPagar)
 
         adapter = AdapterPagament(mutableListOf()) { item ->
             sharedViewModel.removeItem(item)
@@ -68,10 +68,10 @@ class PagamentFragment : Fragment() {
         val total = sharedViewModel.getTotal()
         val now = System.currentTimeMillis()
 
-        // Ajusta campos según tu ProducteCarrito real:
+
         val itemsToSave = items.map { p ->
             hashMapOf(
-                "nom" to p.nom,     // si tu campo se llama distinto, cámbialo aquí
+                "nom" to p.nom,
                 "preu" to p.preu
             )
         }

@@ -33,7 +33,7 @@ class HistorialFragment : Fragment(R.layout.fragment_historial) {
         tvError = view.findViewById(R.id.tvError)
         pb = view.findViewById(R.id.pbLoading)
 
-        adapter = AdapterHistorial { /* click order si quieres */ }
+        adapter = AdapterHistorial { }
 
         rv.layoutManager = LinearLayoutManager(requireContext())
         rv.adapter = adapter

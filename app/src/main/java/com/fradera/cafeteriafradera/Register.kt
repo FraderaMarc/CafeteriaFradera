@@ -38,7 +38,7 @@ class Register : AppCompatActivity() {
             auth.createUserWithEmailAndPassword(email, pass)
                 .addOnSuccessListener {
                     Toast.makeText(this, "Compte creat correctament", Toast.LENGTH_SHORT).show()
-                    finish() // vuelve a Login
+                    finish()
                 }
                 .addOnFailureListener { e ->
                     Toast.makeText(this, "Error registre: ${e.message}", Toast.LENGTH_SHORT).show()

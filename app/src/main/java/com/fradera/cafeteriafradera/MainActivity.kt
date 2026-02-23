@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         installSplashScreen()
         super.onCreate(savedInstanceState)
 
-        // ✅ Si NO hay usuario logueado, fuera a Login
+
         val user = FirebaseAuth.getInstance().currentUser
         if (user == null) {
             startActivity(Intent(this, Login::class.java))
